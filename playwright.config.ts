@@ -31,6 +31,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     ignoreHTTPSErrors: true,
+    navigationTimeout: 30_000,  // wait for 30 sec to wait for loading while navigating pages
   },
 
   /* Configure projects for major browsers */
@@ -41,6 +42,23 @@ export default defineConfig({
     },
 
     {
+      name: 'edge',
+      use: {
+        channel: 'msedge', // Use installed Microsoft Edge
+        ...devices['Desktop Edge'],
+      }
+    },
+
+    {
+    name: 'chrome',
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome', 
+      }
+    },
+
+
+    {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
@@ -49,6 +67,8 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+
+
 
     /* Test against mobile viewports. */
     // {

@@ -10,7 +10,14 @@
   "author": "Diptajit",
   "type": "commonjs",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "login": "npx playwright test tests/functional/login.spec.ts --headed --project=chromium",
+
+    "demoEdge": "npx playwright test tests/demo/mytest.spec.ts --headed --project=edge",
+    "demoChrome": "npx playwright test tests/demo/mytest.spec.ts --headed --project=chrome",
+    "demoFF": "npx playwright test tests/demo/mytest.spec.ts --headed --project=firefox"
+
+  },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.9.2"
