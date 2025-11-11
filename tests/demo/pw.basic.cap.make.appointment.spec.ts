@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { beforeEach } from "node:test";
 
-test("Work with different objects", async ({ page }) => {
+test("Work with different objects",{annotation: {type: "Story", description: "JIRA-1234 test"},tag: "@smoke"}, async ({ page },testInfo) => {
   // Login
   await page.goto("https://katalon-demo-cura.herokuapp.com/");
   await page.getByRole("link", { name: "Make Appointment" }).click();
@@ -16,7 +16,17 @@ test("Work with different objects", async ({ page }) => {
   // await page.getByRole("button", { name: "Login" }).dblclick();
   await page.getByRole("button", { name: "Login" }).press("Enter")
 
+  // Custome screenshot
+  let customScreenshot = await page.screenshot({ fullPage: true });
+  await testInfo.attach("Login page", {
+    body: customScreenshot,
+    contentType: "image/png",
+  });
+
+
   await expect(page.locator("h2")).toContainText("Make Appointment");
+
+  
 
   // objects
   //Assert default dropdown value
@@ -53,10 +63,14 @@ test("Work with different objects", async ({ page }) => {
 
   await expect(page.getByText("Medicare")).not.toBeChecked();  
 
+
+  // await page.pause()  //helps to run from the steps in --ui mode for debug
+
+
   //Date input
   await page.getByRole("textbox",{name: "Visit Date (Required)"}).click();
   await page.getByRole("textbox",{name: "Visit Date (Required)"}).fill("05/10/2027");
-  await page.getByRole("textbox",{name: "Visit Date (Required)"}).press("Enter");
+  // await page.getByRole("textbox",{name: "Visit Date (Required)"}).press("Enter");
 
 
   await page.getByRole("textbox", { name: "Comment" }).click();
@@ -66,55 +80,4 @@ test("Work with different objects", async ({ page }) => {
   await expect(page.locator("h2")).toContainText("Appointment Confirmation");
 
   // await page.getByRole("contentinfo").click({ button: "right" });
-});
-
-
-test.describe("Inventory feature", () => {
-  test.beforeEach("Login with valid creds", async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
-    await page.locator('[data-test="username"]').fill("standard_user");
-    await page.locator('[data-test="password"]').fill("secret_sauce");
-    await page.locator('[data-test="login-button"]').click();
-    await expect(page.locator('[data-test="title"]')).toContainText("Products");
-  });
-
-  test("Should confirm all prices are non zero values", async ({ page }) => {
-    let productElms = page.locator(".inventory_item");
-    await expect(productElms).toHaveCount(6);
-
-    //Get product names and prices
-    let totalProducts = await productElms.count();
-    let priceArr = [];
-
-    for (let i = 0; i < totalProducts; i++) {
-      let eleNode = productElms.nth(i);
-
-      //product name
-      let productName = await eleNode
-        .locator(".inventory_item_name ")
-        .innerText();
-
-      //price
-      let price = await eleNode.locator(".inventory_item_price").innerText();
-
-      priceArr.push(price);
-
-      //Print Result
-      console.log(`Product: ${productName}, Price: ${price}`);
-    }
-
-    let priceNum = priceArr.map((item) => parseFloat(item.replace("$", "")));
-    //[29.99,9.99,15.99,49.99,7.99,15.99]
-
-    console.log(`Price array: ${priceArr}`);
-    console.log(`Modified Price array: ${priceNum}`);
-
-    let invalidPriceArr = priceNum.filter((item) => item <= 0);
-
-    if (invalidPriceArr.length > 0) {
-      console.log(`Error`);
-    }
-
-    expect(invalidPriceArr).toHaveLength(0);
-  });
 });
