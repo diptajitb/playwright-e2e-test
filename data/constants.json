@@ -1,0 +1,9 @@
+{
+
+    "STATUSCODES": {
+        "success": 200,
+        "validationError": 707
+    }
+
+
+}

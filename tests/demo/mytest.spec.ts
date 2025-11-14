@@ -8,3 +8,4 @@ test("Should load home page with correct title", async ({ page }) => {
   await expect(page.locator("//h1")).toHaveText("CURA Healthcare Service");
   
 });
+

@@ -16,11 +16,18 @@
     "debug:ui": "npx playwright test tests/demo/debug.make.appointment.spec.ts --ui --headed --project=chromium",
     "debug": "npx playwright test tests/demo/debug.make.appointment.spec.ts --headed --project=chromium",
     "debug:pw-api": "DEBUG=pw:api npx playwright test tests/demo/debug.make.appointment.spec.ts --headed --project=chromium",
+   
+   
     "demo:tag": "npx playwright test --grep @smoke --headed --project=chromium",
     "demo:global": "npx playwright test tests/functional/login.spec.ts --project=chromium",
     "pw-basic-cap": "npx playwright test tests/demo/pw.basic.cap.make.appointment.spec.ts --headed --project=chromium",
     "demoConfig": "npx playwright test tests/demo/demo.config.spec.ts --headed --project=chromium",
+    "demoHook": "npx playwright test tests/demo/hooks-demo.spec.ts --headed --project=chromium",
+    
+    
     "login": "npx playwright test tests/functional/login.spec.ts --headed --project=chromium",
+    
+    
     "demoEdge": "npx playwright test tests/demo/mytest.spec.ts --headed --project=edge",
     "demoChrome": "npx playwright test tests/demo/mytest.spec.ts --headed --project=chrome",
     "demoFF": "npx playwright test tests/demo/mytest.spec.ts --headed --project=firefox"
