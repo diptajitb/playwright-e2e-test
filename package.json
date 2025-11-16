@@ -23,6 +23,8 @@
     "pw-basic-cap": "npx playwright test tests/demo/pw.basic.cap.make.appointment.spec.ts --headed --project=chromium",
     "demoConfig": "npx playwright test tests/demo/demo.config.spec.ts --headed --project=chromium",
     "demoHook": "npx playwright test tests/demo/hooks-demo.spec.ts --headed --project=chromium",
+    "test:demoDataHandle": "npx playwright test --config=config/test.playwright.config.ts tests/demo/data.handle.spec.ts --headed --project=chromium",
+    "dev:demoDataHandle": "npx playwright test --config=config/dev.playwright.config.ts tests/demo/data.handle.spec.ts --headed --project=chromium",
     
     
     "login": "npx playwright test tests/functional/login.spec.ts --headed --project=chromium",
@@ -32,6 +34,8 @@
     "demoChrome": "npx playwright test tests/demo/mytest.spec.ts --headed --project=chrome",
     "demoFF": "npx playwright test tests/demo/mytest.spec.ts --headed --project=firefox"
   },
+
+  
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.9.2",
